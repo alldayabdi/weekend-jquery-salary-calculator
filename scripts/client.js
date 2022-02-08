@@ -6,6 +6,7 @@ let totalMonthlySalary =0;
 function readyNow(){
     console.log('JQuery is Loaded!');
 $('#submitButton').on('click', submitInfo)
+$('#tableBody').delegate( '#deleteButton','click', deleteButton)
 
 }
 
@@ -47,12 +48,15 @@ function appendToDom(array){
     for (let item of array) {
         $('#tableBody').append(`<tr id = "newRow"> <td>${item.firstName}</td> <td>${item.lastName}</td>
        <td>${item.employeeID}</td> <td>${item.employeeTitle}</td> <td>${item.annualSalary}
-         </td></tr>
+         </td> <td> <button id="deleteButton"> Delete </delete></td></tr>
          `)
     }
 
-   
 
+}
+
+function deleteButton(){
+    $(this).closest('#newRow').remove();
 }
 
 // {/* <input type="text" placeholder="Last Name" id="lastName">
