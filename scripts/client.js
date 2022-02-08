@@ -5,6 +5,7 @@ infoArray=[]
 function readyNow(){
     console.log('JQuery is Loaded!');
 $('#submitButton').on('click', submitInfo)
+
 }
 
 function submitInfo(){
@@ -23,7 +24,21 @@ function submitInfo(){
         $('#employeeID').val(''),
         $('#employeeTitle').val(''),
          $('#annualSalary').val('')
+
+         infoArray.push(employeeInfo)
+         console.log(infoArray);
+    appendToDom(infoArray);
     
+}
+
+function appendToDom(array){
+    for (let item of array) {
+        $('#newRow').append(`<td>${item.firstName}</td> <td>${item.lastName}</td>
+       <td>${item.employeeID}</td> <td>${item.employeeTitle}</td> <td>${item.annualSalary}
+         </td>
+         `)
+    }
+
 }
 
 // {/* <input type="text" placeholder="Last Name" id="lastName">
