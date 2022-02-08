@@ -1,6 +1,7 @@
 $(document).ready(readyNow)
 
 infoArray=[]
+let totalMonthlySalary =0;
 
 function readyNow(){
     console.log('JQuery is Loaded!');
@@ -9,13 +10,14 @@ $('#submitButton').on('click', submitInfo)
 }
 
 function submitInfo(){
+    let employeeSalary = Number($('#annualSalary').val())
     console.log('Button clicked');
     employeeInfo ={
         firstName: $('#firstName').val(),
         lastName: $('#lastName').val(),
         employeeID: $('#employeeID').val(),
         employeeTitle: $('#employeeTitle').val(),
-        annualSalary: $('#annualSalary').val()
+        annualSalary: employeeSalary
 
     }
     console.log(employeeInfo);
@@ -28,16 +30,28 @@ function submitInfo(){
          infoArray.push(employeeInfo)
          console.log(infoArray);
     appendToDom(infoArray);
+
+    let employeeMonthlySalary = Math.round(employeeInfo.annualSalary/12)
+    totalMonthlySalary += employeeMonthlySalary
+    $('#totalMonthlySalary').text(totalMonthlySalary)
+
+    if (totalMonthlySalary > 20000) {
+        $('#totalMonthlySalary').css('color', 'red')
+        
+    }
     
 }
 
 function appendToDom(array){
+    $('#tableBody').empty();
     for (let item of array) {
-        $('#newRow').append(`<td>${item.firstName}</td> <td>${item.lastName}</td>
+        $('#tableBody').append(`<tr id = "newRow"> <td>${item.firstName}</td> <td>${item.lastName}</td>
        <td>${item.employeeID}</td> <td>${item.employeeTitle}</td> <td>${item.annualSalary}
-         </td>
+         </td></tr>
          `)
     }
+
+   
 
 }
 
